@@ -35,13 +35,13 @@ public class Shop {
 
     private String email;
 
-    // ✅ One Shop has many Bills
-    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore  // ✅ Prevents infinite recursion
-    private List<Bill> bills;
 
-    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore  // ✅ Prevents infinite recursion
-    private List<User> users = new ArrayList<>();
+//    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonIgnore  // ✅ Prevents infinite recursion
+//    private List<Bill> bills;
+//
+//    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    private List<User> users = new ArrayList<>();
 
 }
