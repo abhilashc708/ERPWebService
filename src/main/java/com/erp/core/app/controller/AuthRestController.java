@@ -7,8 +7,10 @@ import com.erp.core.app.message.response.JwtResponse;
 import com.erp.core.app.message.response.ResponseMessage;
 import com.erp.core.app.model.Role;
 import com.erp.core.app.model.RoleName;
+import com.erp.core.app.model.Shop;
 import com.erp.core.app.model.User;
 import com.erp.core.app.repository.RoleRepository;
+import com.erp.core.app.repository.ShopRepository;
 import com.erp.core.app.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,6 +57,9 @@ public class AuthRestController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    ShopRepository shopRepository;
+
     @PostMapping(value = "/superadmin/auth/signup", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createAdmin(@Validated @RequestBody SignUpForm signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -91,6 +96,11 @@ public class AuthRestController {
                     roles.add(userRole);
             }
         });
+ if(signUpRequest.getShopId() != null) {
+     Shop shop = shopRepository.findById(signUpRequest.getShopId())
+             .orElseThrow(() -> new RuntimeException("Shop not found"));
+     user.setShop(shop);
+ }
 
         user.setRoles(roles);
         userRepository.save(user);

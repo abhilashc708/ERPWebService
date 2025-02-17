@@ -91,13 +91,11 @@ public class UserController {
             }
         });
 
-        if(signUpRequest.getShopId() != null) {
-            Shop shop = shopRepository.findById(signUpRequest.getShopId())
-                    .orElseThrow(() -> new RuntimeException("Shop not found"));
-            user.setShop(shop);
-        }
+        Shop shop = shopRepository.findById(signUpRequest.getShopId())
+                .orElseThrow(() -> new RuntimeException("Shop not found"));
 
         user.setRoles(roles);
+        user.setShop(shop);
         userRepository.save(user);
         return new ResponseEntity<>(new ResponseMessage("User Created successfully!"), HttpStatus.OK);
     }
