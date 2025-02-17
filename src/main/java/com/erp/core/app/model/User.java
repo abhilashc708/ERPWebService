@@ -46,7 +46,7 @@ public class User {
     private String address;
 
     @OneToOne(targetEntity = Shop.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false, name = "shop_id")
+    @JoinColumn(nullable = true, name = "shop_id")
     private Shop shop;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
