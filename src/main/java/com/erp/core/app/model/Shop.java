@@ -1,6 +1,5 @@
 package com.erp.core.app.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,8 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "shop")

@@ -1,5 +1,6 @@
 package com.erp.core.app.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ public class BillItem {
 
     @ManyToOne
     @JoinColumn(name = "bill_id", nullable = false)
-    @JsonIgnore  // ✅ Prevents infinite recursion
+    @JsonBackReference  // ✅ Prevents infinite recursion
     private Bill bill;
 
     @ManyToOne
