@@ -45,8 +45,8 @@ public class User {
 
     private String address;
 
-    @OneToOne(targetEntity = Shop.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = true, name = "shop_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "shop_id", nullable = true)
     private Shop shop;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
