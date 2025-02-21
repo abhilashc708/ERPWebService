@@ -50,7 +50,7 @@ public class ProductController {
     }
 
     @GetMapping(value="/product/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getShopById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<?> getProductById(@PathVariable(value = "id") Long id) {
         try {
             Optional<Product> product = productService.findOne(id);
             if (!product.isPresent()) {
@@ -82,7 +82,7 @@ public class ProductController {
     }
 
     @DeleteMapping(value="/product/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> deleteShop(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<?> deleteProduct(@PathVariable(value = "id") Long id) {
         try {
 
             Optional<Product> product = productService.findOne(id);
