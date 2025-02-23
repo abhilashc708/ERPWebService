@@ -39,4 +39,7 @@ public class Bill {
     @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BillItem> items;
 
+    public double getTotalAmount() {
+        return items.stream().mapToDouble(item -> item.getPrice() * item.getQuantity()).sum();
+    }
 }

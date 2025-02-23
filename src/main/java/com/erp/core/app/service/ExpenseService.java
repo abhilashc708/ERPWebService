@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ExpenseService {
@@ -56,6 +57,7 @@ public class ExpenseService {
         String loggedInUser = getLoggedInUsername();
         expense.setCreatedBy(loggedInUser); // ✅ Store username
         expense.setExpenseItem(expenseItem);
+        expense.setExpenseBillCode(generateCode());
         expense.setShop(shop);
         return expenseRepository.save(expense);
     }
@@ -78,6 +80,7 @@ public class ExpenseService {
             expense.setRate(expenseDto.getRate());
             expense.setExpenseItem(expense.getExpenseItem());
             expense.setCreatedBy(expense.getCreatedBy());
+            expense.setExpenseBillCode(expense.getExpenseBillCode());
             return expenseRepository.saveAndFlush(expense);
         }else{
             throw new ChangeSetPersister.NotFoundException();
@@ -96,5 +99,9 @@ public class ExpenseService {
         } else {
             return principal.toString();
         }
+    }
+
+        public static String generateCode() {
+            return "TJ" + UUID.randomUUID().toString().replace("-", "").substring(0, 6);
     }
 }

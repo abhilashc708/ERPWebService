@@ -22,6 +22,8 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long expenseId;
 
+    private String expenseBillCode;
+
     @ManyToOne
     @JoinColumn(name = "expense_item_id", nullable = false)
     private ExpenseItem expenseItem;

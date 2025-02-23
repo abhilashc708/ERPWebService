@@ -7,6 +7,8 @@ public class ExpenseDto {
 
     private Long expenseItemId;
 
+    private String expenseBillCode;
+
     private Long shopId;
 
     private Integer rate;
