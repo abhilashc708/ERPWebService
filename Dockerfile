@@ -17,9 +17,6 @@ RUN chmod +x mvnw
 # Build the Spring Boot JAR file
 RUN ./mvnw clean package -DskipTests  
 
-# Copy the generated JAR file
-COPY target/*.jar app.jar  
-
 # Expose the application port (optional)
 EXPOSE 8080  
 
