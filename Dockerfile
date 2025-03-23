@@ -23,7 +23,7 @@
 # # Run the application
 # CMD ["java", "-jar", "app.jar"]
 
-# Use an official JDK image
+# Use official JDK image
 FROM eclipse-temurin:17-jdk-alpine
 
 # Set working directory
@@ -35,11 +35,11 @@ COPY . .
 # Grant execution permission for Maven wrapper
 RUN chmod +x mvnw
 
-# Build the JAR file
+# Build the application
 RUN ./mvnw clean package -DskipTests
 
 # Expose port 8080
 EXPOSE 8080
 
-# Run the Spring Boot application
-CMD ["java", "-jar", "target/ERPWebApp-0.0.1-SNAPSHOT.jar", "--server.port=" + System.getenv("PORT")]
+# Run the application with Render's port
+CMD ["sh", "-c", "java -jar target/ERPWebApp-0.0.1-SNAPSHOT.jar --server.port=8080"]
