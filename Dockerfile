@@ -42,4 +42,4 @@ RUN ./mvnw clean package -DskipTests
 EXPOSE 8080
 
 # Run the Spring Boot application
-CMD ["java", "-jar", "target/ERPWebApp-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/ERPWebApp-0.0.1-SNAPSHOT.jar", "--server.port=" + System.getenv("PORT")]
