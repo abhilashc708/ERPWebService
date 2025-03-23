@@ -1,24 +1,45 @@
+# # Use an official JDK image
+# FROM eclipse-temurin:17-jdk-alpine
+#
+# # Set working directory inside the container
+# WORKDIR /app
+#
+# # Copy the Maven wrapper and pom.xml
+# COPY mvnw pom.xml ./
+# COPY .mvn .mvn
+#
+# # Copy the entire project
+# COPY src src
+#
+# # Grant execution permission for Maven wrapper
+# RUN chmod +x mvnw
+#
+# # Build the Spring Boot JAR file
+# RUN ./mvnw clean package -DskipTests
+#
+# # Expose the application port (optional)
+# EXPOSE 8080
+#
+# # Run the application
+# CMD ["java", "-jar", "app.jar"]
+
 # Use an official JDK image
-FROM eclipse-temurin:17-jdk-alpine  
+FROM eclipse-temurin:17-jdk-alpine
 
-# Set working directory inside the container
-WORKDIR /app  
+# Set working directory
+WORKDIR /app
 
-# Copy the Maven wrapper and pom.xml
-COPY mvnw pom.xml ./
-COPY .mvn .mvn  
-
-# Copy the entire project
-COPY src src  
+# Copy project files
+COPY . .
 
 # Grant execution permission for Maven wrapper
-RUN chmod +x mvnw  
+RUN chmod +x mvnw
 
-# Build the Spring Boot JAR file
-RUN ./mvnw clean package -DskipTests  
+# Build the JAR file
+RUN ./mvnw clean package -DskipTests
 
-# Expose the application port (optional)
-EXPOSE 8080  
+# Expose port 8080
+EXPOSE 8080
 
-# Run the application
-CMD ["java", "-jar", "app.jar"]
+# Run the Spring Boot application
+CMD ["java", "-jar", "target/ERPWebApp-0.0.1-SNAPSHOT.jar"]
