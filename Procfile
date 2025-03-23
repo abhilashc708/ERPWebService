@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/ERPWebApp-0.0.1-SNAPSHOT.jar
+web: java -jar target/ERPWebApp-0.0.1-SNAPSHOT.jar --server.port=8080 --server.address=0.0.0.0
