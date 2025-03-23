@@ -1,14 +1,22 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:17-jdk-slim as build
+# Use an official Maven image to build the app
+FROM maven:3.8.7-openjdk-17 AS build
 
-# Set the working directory
 WORKDIR /app
 
-# Copy the application JAR file
-COPY target/ERPWebApp-0.0.1-SNAPSHOT.jar demo.jar
+# Copy source code and build application
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Expose the application port
+# Use OpenJDK image to run the application
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+# Copy the built JAR from the first stage
+COPY --from=build /app/target/ERPWebApp-0.0.1-SNAPSHOT.jar app.jar
+
+# Expose port 8080
 EXPOSE 8080
 
-# Run the JAR file
-ENTRYPOINT ["java", "-jar", "demo.jar"]
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
