@@ -1,8 +1,22 @@
-FROM maven:4.0.0-openjdk-17 as build
+# Use an official Maven image to build the app
+FROM maven:3.9.6-eclipse-temurin-17 AS build
+
+WORKDIR /app
+
+# Copy source code and build application
 COPY . .
 RUN mvn clean package -DskipTests
 
-FROM openjdk:17.0.1-jdk-slim
-COPY --from=build target/ERPWebApp-0.0.1-SNAPSHOT.jar demo.jar
+# Use OpenJDK image to run the application
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+# Copy the built JAR from the first stage
+COPY --from=build /app/target/ERPWebApp-0.0.1-SNAPSHOT.jar app.jar
+
+# Expose port 8080
 EXPOSE 8080
-ENTRYPOINT["java","-jar","demo.jar"]
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
